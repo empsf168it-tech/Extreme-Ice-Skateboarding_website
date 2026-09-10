@@ -30,8 +30,8 @@ export const Hero: React.FC = () => {
         muted
         playsInline
       >
-        <source src="/videos/ice-skating.webm" type="video/webm" />
-        <source src="/videos/ice-skating-speed.webm" type="video/webm" />
+        <source src={`${import.meta.env.BASE_URL}videos/ice-skating.webm`} type="video/webm" />
+        <source src={`${import.meta.env.BASE_URL}videos/ice-skating-speed.webm`} type="video/webm" />
         <source
           src="https://upload.wikimedia.org/wikipedia/commons/7/7d/Ice_skating_hand_stand_stunt.webm"
           type="video/webm"
