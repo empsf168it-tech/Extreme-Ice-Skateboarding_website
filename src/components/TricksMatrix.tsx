@@ -51,7 +51,7 @@ const tricksData: Trick[] = [
     minSpeed: '28 km/h',
     airtime: '0.9s',
     landedCount: '4,890',
-    image: 'https://images.unsplash.com/photo-1517649763962-0c623266ddc0?auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1551524559-8af4e6624178?auto=format&fit=crop&w=800&q=80',
     description: 'Centering both tungsten blade edges along a 40-foot sub-zero frosted steel handrail.',
     keyTechnique: 'Keep weight centered over front truck to avoid blade gouging.',
   },

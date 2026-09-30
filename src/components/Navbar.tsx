@@ -1,9 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
+const navItems = [
+  { id: 'hero', label: 'home' },
+  { id: 'skate', label: 'skate' },
+  { id: 'tricks', label: 'tricks' },
+  { id: 'events', label: 'events' },
+  { id: 'spots', label: 'frontiers' },
+  { id: 'gear', label: 'gear' },
+  { id: 'simulator', label: 'calculator' },
+];
 
 export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>('hero');
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + window.innerHeight * 0.35;
+
+      // When reaching near bottom of page, activate last section
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 60) {
+        setActiveSection('simulator');
+        return;
+      }
+
+      for (let i = navItems.length - 1; i >= 0; i--) {
+        const item = navItems[i];
+        const el = document.getElementById(item.id);
+        if (el) {
+          const top = el.offsetTop;
+          if (scrollPosition >= top) {
+            setActiveSection(item.id);
+            return;
+          }
+        }
+      }
+
+      if (window.scrollY < 100) {
+        setActiveSection('hero');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const scrollToSection = (id: string) => {
+    setActiveSection(id);
     setMobileMenuOpen(false);
     const element = document.getElementById(id);
     if (element) {
@@ -43,50 +88,24 @@ export const Navbar: React.FC = () => {
           </span>
         </button>
 
-        {/* Center: Navigation Menu with Clear High-Contrast White Text */}
-        <nav className="hidden md:flex items-center gap-1 bg-neutral-900/90 rounded-full px-3 py-1.5 border border-white/20 shadow-inner">
-          <button
-            onClick={() => scrollToSection('hero')}
-            className="text-white hover:bg-white/15 transition-all text-xs font-medium px-3.5 py-1.5 rounded-full cursor-pointer"
-          >
-            home
-          </button>
-          <button
-            onClick={() => scrollToSection('skate')}
-            className="text-white hover:bg-white/15 transition-all text-xs font-medium px-3.5 py-1.5 rounded-full cursor-pointer"
-          >
-            skate
-          </button>
-          <button
-            onClick={() => scrollToSection('tricks')}
-            className="text-white hover:bg-white/15 transition-all text-xs font-medium px-3.5 py-1.5 rounded-full cursor-pointer"
-          >
-            tricks
-          </button>
-          <button
-            onClick={() => scrollToSection('events')}
-            className="text-white hover:bg-white/15 transition-all text-xs font-medium px-3.5 py-1.5 rounded-full cursor-pointer"
-          >
-            events
-          </button>
-          <button
-            onClick={() => scrollToSection('spots')}
-            className="text-white hover:bg-white/15 transition-all text-xs font-medium px-3.5 py-1.5 rounded-full cursor-pointer"
-          >
-            frontiers
-          </button>
-          <button
-            onClick={() => scrollToSection('gear')}
-            className="text-white hover:bg-white/15 transition-all text-xs font-medium px-3.5 py-1.5 rounded-full cursor-pointer"
-          >
-            gear
-          </button>
-          <button
-            onClick={() => scrollToSection('simulator')}
-            className="text-white hover:bg-white/15 transition-all text-xs font-medium px-3.5 py-1.5 rounded-full cursor-pointer"
-          >
-            calculator
-          </button>
+        {/* Center: Navigation Menu with Clear High-Contrast Active State */}
+        <nav className="hidden xl:flex items-center gap-1 bg-neutral-900/90 rounded-full px-3 py-1.5 border border-white/20 shadow-inner">
+          {navItems.map((item) => {
+            const isActive = activeSection === item.id;
+            return (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className={`transition-all text-xs px-3.5 py-1.5 rounded-full cursor-pointer font-medium ${
+                  isActive
+                    ? 'bg-white text-black font-bold shadow-md'
+                    : 'text-white/90 hover:text-white hover:bg-white/15'
+                }`}
+              >
+                {item.label}
+              </button>
+            );
+          })}
         </nav>
 
         {/* Right Button: CTA & Mobile toggle */}
@@ -94,15 +113,15 @@ export const Navbar: React.FC = () => {
           <button
             onClick={() => scrollToSection('join')}
             type="button"
-            className="hidden md:inline-flex items-center justify-center bg-white text-black text-xs font-bold rounded-full px-5 py-2.5 hover:bg-neutral-200 transition-all cursor-pointer shadow-lg hover:scale-[1.02]"
+            className="hidden xl:inline-flex items-center justify-center bg-white text-black text-xs font-bold rounded-full px-5 py-2.5 hover:bg-neutral-200 transition-all cursor-pointer shadow-lg hover:scale-[1.02]"
           >
             start skating
           </button>
 
-          {/* Mobile hamburger toggle */}
+          {/* Mobile and Tablet hamburger toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden flex items-center justify-center w-10 h-10 bg-neutral-900 rounded-full text-white cursor-pointer border border-white/20 hover:border-white/50 transition-colors"
+            className="xl:hidden flex items-center justify-center w-10 h-10 bg-neutral-900 rounded-full text-white cursor-pointer border border-white/20 hover:border-white/50 transition-colors"
             aria-label="Toggle navigation menu"
           >
             <svg
@@ -133,58 +152,32 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile & Tablet Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="md:hidden px-4 pb-5 pt-2 border-t border-white/15 bg-black/98 backdrop-blur-2xl flex flex-col gap-2 shadow-2xl">
-          <button
-            onClick={() => scrollToSection('hero')}
-            className="text-left text-white py-2.5 px-3 rounded-lg hover:bg-neutral-800 transition-colors text-sm font-semibold"
-          >
-            home
-          </button>
-          <button
-            onClick={() => scrollToSection('skate')}
-            className="text-left text-white py-2.5 px-3 rounded-lg hover:bg-neutral-800 transition-colors text-sm font-semibold"
-          >
-            skate
-          </button>
-          <button
-            onClick={() => scrollToSection('tricks')}
-            className="text-left text-white py-2.5 px-3 rounded-lg hover:bg-neutral-800 transition-colors text-sm font-semibold"
-          >
-            tricks
-          </button>
-          <button
-            onClick={() => scrollToSection('events')}
-            className="text-left text-white py-2.5 px-3 rounded-lg hover:bg-neutral-800 transition-colors text-sm font-semibold"
-          >
-            events
-          </button>
-          <button
-            onClick={() => scrollToSection('spots')}
-            className="text-left text-white py-2.5 px-3 rounded-lg hover:bg-neutral-800 transition-colors text-sm font-semibold"
-          >
-            frontiers radar
-          </button>
-          <button
-            onClick={() => scrollToSection('gear')}
-            className="text-left text-white py-2.5 px-3 rounded-lg hover:bg-neutral-800 transition-colors text-sm font-semibold"
-          >
-            gear & tech
-          </button>
-          <button
-            onClick={() => scrollToSection('simulator')}
-            className="text-left text-white py-2.5 px-3 rounded-lg hover:bg-neutral-800 transition-colors text-sm font-semibold"
-          >
-            speed calculator
-          </button>
+        <div className="xl:hidden px-4 pb-5 pt-2 border-t border-white/15 bg-black/98 backdrop-blur-2xl flex flex-col gap-1.5 shadow-2xl">
+          {navItems.map((item) => {
+            const isActive = activeSection === item.id;
+            return (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className={`text-left py-2.5 px-3 rounded-lg transition-colors text-sm font-semibold flex items-center justify-between ${
+                  isActive
+                    ? 'bg-white text-black font-bold shadow-md'
+                    : 'text-white hover:bg-neutral-800'
+                }`}
+              >
+                <span>{item.label}</span>
+                {isActive && <span className="text-xs">●</span>}
+              </button>
+            );
+          })}
 
           {/* Prominent CTA inside hamburger menu for mobile & tablet */}
           <div className="pt-2 border-t border-white/15 mt-1">
             <button
               onClick={() => scrollToSection('join')}
-              className="w-full py-3 rounded-full bg-white text-black font-bold text-sm text-center shadow-xl hover:bg-neutral-200 transition-all cursor-pointer flex items-center justify-center gap-2"
+              className="w-full py-3 rounded-full bg-white text-black font-bold text-sm text-center shadow-xl hover:bg-neutral-200 transition-all cursor-pointer flex items-center justify-center"
             >
               <span>start skating</span>
-              <span>↗</span>
             </button>
           </div>
         </div>

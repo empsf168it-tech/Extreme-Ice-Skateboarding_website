@@ -87,10 +87,10 @@ export const Footer: React.FC = () => {
                   </div>
                   <button
                     type="submit"
-                    className="w-full py-3.5 rounded-full bg-white text-black text-sm font-bold hover:bg-neutral-200 transition-all cursor-pointer shadow-lg hover:scale-[1.01] flex items-center justify-center gap-2"
+                    className="w-full py-3.5 px-4 rounded-full bg-white text-black text-sm font-bold hover:bg-neutral-200 transition-all cursor-pointer shadow-lg hover:scale-[1.01] flex items-center justify-center text-center gap-2"
                   >
-                    <span>Claim VIP Athlete Pass</span>
-                    <span>→</span>
+                    <span className="text-center">Claim VIP Athlete Pass</span>
+                    <span aria-hidden="true">→</span>
                   </button>
                   <p className="text-[11px] text-white/70 text-center font-light pt-1">
                     Instant digital pass issued. No spam, unsubscribe anytime.
@@ -110,24 +110,24 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* STATS & TRUST STRIP */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 py-8 mb-12 border-y border-white/15">
+        <div className="grid grid-cols-2 gap-x-8 gap-y-6 py-8 mb-12 border-y border-white/15">
           {[
             { label: 'GLOBAL TRACKS & SPOTS', value: '45+ ARENAS' },
             { label: 'REGISTERED RIDERS', value: '1.5M+ RIDERS' },
             { label: '2026 WORLD PRIZE POOL', value: '$500,000 USD' },
             { label: 'COLD RESISTANCE SPEC', value: '-35°C TESTED' },
           ].map((stat, i) => (
-            <div key={i} className="text-center md:text-left px-2">
+            <div key={i} className="text-left px-2">
               <div className="text-xs font-mono text-white/70 uppercase tracking-wider mb-1">{stat.label}</div>
-              <div className="text-lg sm:text-xl font-bold text-white font-mono">{stat.value}</div>
+              <div className="text-lg sm:text-2xl font-bold text-white font-mono">{stat.value}</div>
             </div>
           ))}
         </div>
 
         {/* MAIN NAVIGATION 5 COLUMNS */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-12 mb-16">
+        <div className="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-5 gap-8 xl:gap-12 mb-16">
           {/* Column 1: Brand & Socials */}
-          <div className="col-span-2 md:col-span-3 lg:col-span-1 space-y-4">
+          <div className="col-span-2 md:col-span-2 xl:col-span-1 space-y-4">
             <button
               onClick={() => scrollToSection('hero')}
               className="flex items-center gap-2.5 cursor-pointer text-left group"
@@ -150,7 +150,7 @@ export const Footer: React.FC = () => {
               </div>
               <span className="text-white font-bold text-xl tracking-tight uppercase">GLACIERIDE</span>
             </button>
-            <p className="text-white text-xs leading-relaxed font-light">
+            <p className="text-white text-xs leading-relaxed font-light max-w-sm">
               The premier international hub for extreme ice skateboarding, frozen vert tournaments, downhill cross circuits, and arctic sports engineering.
             </p>
 
@@ -161,7 +161,7 @@ export const Footer: React.FC = () => {
             </div>
 
             {/* Social Icons */}
-            <div className="flex flex-wrap gap-2 pt-2">
+            <div className="flex items-center gap-2 pt-2 flex-wrap">
               {[
                 { name: 'Instagram', label: 'IG' },
                 { name: 'YouTube', label: 'YT' },
@@ -287,8 +287,8 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* BOTTOM METRICS & LEGAL BAR */}
-        <div className="border-t border-white/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-white font-mono">
-          <div className="flex flex-wrap items-center justify-center md:justify-start gap-4">
+        <div className="border-t border-white/20 pt-8 flex flex-col xl:flex-row justify-between items-center gap-6 text-xs text-white font-mono">
+          <div className="flex flex-wrap items-center justify-center xl:justify-start gap-4 text-center xl:text-left">
             <span className="font-bold">© 2026 GLACIERIDE SPORTS INC.</span>
             <span className="text-white/40 hidden sm:inline">•</span>
             <span className="text-white/80">ALL RIGHTS RESERVED</span>
@@ -302,7 +302,7 @@ export const Footer: React.FC = () => {
             <a href="#" className="text-white/80 hover:text-white transition-colors">Security</a>
             <button
               onClick={() => scrollToSection('hero')}
-              className="px-3 py-1.5 rounded-full bg-white text-black font-bold hover:bg-neutral-200 transition-all cursor-pointer flex items-center gap-1 shadow-md hover:scale-105"
+              className="px-3.5 py-1.5 rounded-full bg-white text-black font-bold hover:bg-neutral-200 transition-all cursor-pointer flex items-center gap-1 shadow-md hover:scale-105"
             >
               <span>Back to Top</span>
               <span>↑</span>

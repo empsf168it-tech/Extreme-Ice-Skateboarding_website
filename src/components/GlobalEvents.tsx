@@ -171,18 +171,18 @@ export const GlobalEvents: React.FC = () => {
                   </div>
 
                   {/* Bottom stats & action */}
-                  <div className="pt-4 border-t border-white/20 flex items-center justify-between gap-4">
-                    <div>
+                  <div className="pt-4 border-t border-white/20 flex flex-col xl:flex-row items-stretch xl:items-center justify-between gap-4">
+                    <div className="flex-shrink-0">
                       <div className="text-[10px] text-white/90 font-mono uppercase font-semibold">Prize Purse</div>
-                      <div className="text-xl md:text-2xl font-bold text-white font-mono mt-0.5">{evt.prizePool}</div>
+                      <div className="text-xl md:text-2xl font-bold text-white font-mono mt-0.5 whitespace-nowrap">{evt.prizePool}</div>
                     </div>
 
                     <motion.button
-                      whileHover={{ scale: 1.03 }}
-                      whileTap={{ scale: 0.97 }}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
                       onClick={() => handleRegister(evt.id, evt.title)}
                       disabled={isRegistered}
-                      className={`px-6 py-3 rounded-full text-xs md:text-sm transition-all cursor-pointer whitespace-nowrap font-bold shadow-lg ${
+                      className={`w-full xl:w-auto px-6 py-3 rounded-full text-xs sm:text-sm transition-all cursor-pointer font-bold shadow-lg text-center flex items-center justify-center whitespace-nowrap ${
                         isRegistered
                           ? 'bg-neutral-800 text-white/60 cursor-not-allowed border border-white/20'
                           : 'bg-white text-black hover:bg-neutral-200'

@@ -92,19 +92,20 @@ export const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.25 }}
-            className="flex flex-wrap items-center gap-4 mt-6 md:mt-8"
+            className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 mt-6 md:mt-8 w-full sm:w-auto max-w-sm sm:max-w-none"
           >
             <button
               onClick={() => scrollToSection('skate')}
-              className="px-7 py-3.5 rounded-full bg-white text-black text-sm font-semibold hover:bg-neutral-200 transition-all hover:scale-105 cursor-pointer shadow-2xl"
+              className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-white text-black text-sm font-semibold hover:bg-neutral-200 transition-all hover:scale-105 cursor-pointer shadow-2xl flex items-center justify-center gap-1.5 text-center"
             >
-              explore disciplines ↗
+              <span>explore disciplines</span>
+              <span>↗</span>
             </button>
             <button
               onClick={() => scrollToSection('spots')}
-              className="px-7 py-3.5 rounded-full bg-black/80 hover:bg-black text-white text-sm font-medium border border-white/30 hover:border-white transition-all backdrop-blur-md cursor-pointer shadow-xl"
+              className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-black/80 hover:bg-black text-white text-sm font-medium border border-white/30 hover:border-white transition-all backdrop-blur-md cursor-pointer shadow-xl flex items-center justify-center text-center"
             >
-              scout ice frontiers
+              <span>scout ice frontiers</span>
             </button>
           </motion.div>
         </div>

@@ -72,28 +72,31 @@ export const InteractiveSimulator: React.FC = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="relative rounded-3xl overflow-hidden border border-white/25 h-48 mb-10 flex items-center p-8 shadow-2xl group"
+          className="relative rounded-3xl overflow-hidden border border-white/25 min-h-[11rem] mb-10 flex flex-col md:flex-row md:items-center justify-between p-6 md:p-8 gap-4 shadow-2xl group"
         >
           <img
             src="https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=1200&q=80"
             alt="Ice speed track"
             className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/85 to-black/40 md:to-transparent" />
           {/* Animated shimmer sweep overlay */}
           <div className="absolute inset-0 animate-shimmer pointer-events-none" />
-          <div className="relative z-10">
-            <span className="text-xs font-mono text-white uppercase tracking-widest block mb-1 font-bold drop-shadow">
+
+          {/* Left / Main Text Content */}
+          <div className="relative z-10 max-w-2xl">
+            <span className="text-xs font-mono text-white/90 uppercase tracking-widest block mb-1.5 font-bold drop-shadow">
               ICE DYNAMICS TELEMETRY ENGINE
             </span>
-            <div className="text-xl md:text-3xl font-medium text-white drop-shadow-lg">
+            <div className="hero-title text-xl md:text-3xl font-medium text-white drop-shadow-lg leading-tight">
               Simulating Alpine Blue Ice &amp; Tungsten Blade Friction
             </div>
           </div>
+
           {/* Live running status */}
-          <div className="absolute top-4 right-4 flex items-center gap-2 bg-black/90 border border-white/30 px-3 py-1.5 rounded-full text-xs font-mono text-white">
+          <div className="relative z-10 self-start md:self-center flex-shrink-0 flex items-center gap-2 bg-black/90 border border-white/30 px-3.5 py-1.5 rounded-full text-xs font-mono text-white shadow-lg backdrop-blur-md">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-            <span className="font-bold">SIM RUNNING</span>
+            <span className="font-bold whitespace-nowrap">SIM RUNNING</span>
           </div>
         </motion.div>
 

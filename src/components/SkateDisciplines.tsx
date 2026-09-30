@@ -44,7 +44,7 @@ const disciplines: Discipline[] = [
     gForceNum: 92,
     riskFactor: 'extreme',
     terrain: 'natural alpine ice chutes',
-    image: 'https://images.unsplash.com/photo-1517649763962-0c623266ddc0?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://images.unsplash.com/photo-1551524559-8af4e6624178?auto=format&fit=crop&w=1200&q=80',
     features: ['drafting overtakes', '70° banked turns', 'aerodynamic tucks', 'emergency ice braking'],
   },
   {
@@ -146,13 +146,13 @@ export const SkateDisciplines: React.FC = () => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.97, y: -20 }}
             transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch"
+            className="grid grid-cols-1 xl:grid-cols-12 gap-8 items-stretch"
           >
             {/* Left Main Card with 3D Hover & Shimmer */}
             <motion.div
               whileHover={{ y: -4 }}
               transition={{ duration: 0.3 }}
-              className="lg:col-span-7 relative rounded-3xl overflow-hidden border border-white/30 min-h-[460px] flex flex-col justify-between p-8 md:p-12 group shadow-2xl bg-neutral-950"
+              className="xl:col-span-7 relative rounded-3xl overflow-hidden border border-white/30 min-h-[460px] flex flex-col justify-between p-8 md:p-12 group shadow-2xl bg-neutral-950"
             >
               {/* Full Color Image with Zoom Effect */}
               <img
@@ -201,19 +201,19 @@ export const SkateDisciplines: React.FC = () => {
             </motion.div>
 
             {/* Right Interactive Telemetry Cards with Progress Meters */}
-            <div className="lg:col-span-5 grid grid-cols-2 gap-4">
+            <div className="xl:col-span-5 grid grid-cols-2 grid-rows-2 gap-4">
               {/* Metric 1: Velocity */}
               <motion.div
                 whileHover={{ scale: 1.03, y: -3 }}
                 transition={{ duration: 0.25 }}
-                className="bg-neutral-900 border border-white/20 hover:border-white/60 rounded-3xl p-6 md:p-8 flex flex-col justify-between backdrop-blur shadow-xl transition-colors group"
+                className="bg-neutral-900 border border-white/20 hover:border-white/60 rounded-3xl p-5 md:p-6 flex flex-col justify-between backdrop-blur shadow-xl transition-colors group h-full"
               >
                 <div className="flex justify-between items-center">
                   <span className="text-xs text-white/90 uppercase font-mono font-semibold">Top Velocity</span>
                   <span className="text-xs">⚡</span>
                 </div>
                 <div>
-                  <div className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-2 font-mono group-hover:text-white">
+                  <div className="text-2xl sm:text-3xl xl:text-4xl font-bold tracking-tight text-white mb-2 font-mono group-hover:text-white whitespace-nowrap">
                     {selected.topSpeed}
                   </div>
                   {/* Progress meter bar */}
@@ -233,14 +233,14 @@ export const SkateDisciplines: React.FC = () => {
               <motion.div
                 whileHover={{ scale: 1.03, y: -3 }}
                 transition={{ duration: 0.25 }}
-                className="bg-neutral-900 border border-white/20 hover:border-white/60 rounded-3xl p-6 md:p-8 flex flex-col justify-between backdrop-blur shadow-xl transition-colors group"
+                className="bg-neutral-900 border border-white/20 hover:border-white/60 rounded-3xl p-5 md:p-6 flex flex-col justify-between backdrop-blur shadow-xl transition-colors group h-full"
               >
                 <div className="flex justify-between items-center">
                   <span className="text-xs text-white/90 uppercase font-mono font-semibold">G-Force Load</span>
                   <span className="text-xs">🎯</span>
                 </div>
                 <div>
-                  <div className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-2 font-mono group-hover:text-white">
+                  <div className="text-2xl sm:text-3xl xl:text-4xl font-bold tracking-tight text-white mb-2 font-mono group-hover:text-white whitespace-nowrap">
                     {selected.gForce}
                   </div>
                   <div className="w-full bg-neutral-800 h-1.5 rounded-full overflow-hidden mb-2">
@@ -259,15 +259,25 @@ export const SkateDisciplines: React.FC = () => {
               <motion.div
                 whileHover={{ scale: 1.03, y: -3 }}
                 transition={{ duration: 0.25 }}
-                className="bg-neutral-900 border border-white/20 hover:border-white/60 rounded-3xl p-6 md:p-8 flex flex-col justify-between backdrop-blur shadow-xl transition-colors group"
+                className="bg-neutral-900 border border-white/20 hover:border-white/60 rounded-3xl p-5 md:p-6 flex flex-col justify-between backdrop-blur shadow-xl transition-colors group h-full"
               >
                 <div className="flex justify-between items-center">
                   <span className="text-xs text-white/90 uppercase font-mono font-semibold">Risk Rating</span>
                   <span className="text-xs">⚠️</span>
                 </div>
                 <div>
-                  <div className="text-2xl md:text-3xl font-bold uppercase tracking-tight text-white mb-2 group-hover:text-white">
+                  <div className="text-2xl sm:text-3xl xl:text-4xl font-bold uppercase tracking-tight text-white mb-2 font-mono group-hover:text-white whitespace-nowrap">
                     {selected.riskFactor}
+                  </div>
+                  <div className="w-full bg-neutral-800 h-1.5 rounded-full overflow-hidden mb-2">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={{
+                        width: selected.riskFactor === 'critical' ? '98%' : selected.riskFactor === 'extreme' ? '82%' : '65%',
+                      }}
+                      transition={{ duration: 0.8, ease: 'easeOut' }}
+                      className="h-full bg-white rounded-full"
+                    />
                   </div>
                   <div className="text-[11px] text-white/90 font-mono">FULL ARMOR REQ.</div>
                 </div>
@@ -277,15 +287,23 @@ export const SkateDisciplines: React.FC = () => {
               <motion.div
                 whileHover={{ scale: 1.03, y: -3 }}
                 transition={{ duration: 0.25 }}
-                className="bg-neutral-900 border border-white/20 hover:border-white/60 rounded-3xl p-6 md:p-8 flex flex-col justify-between backdrop-blur shadow-xl transition-colors group"
+                className="bg-neutral-900 border border-white/20 hover:border-white/60 rounded-3xl p-5 md:p-6 flex flex-col justify-between backdrop-blur shadow-xl transition-colors group h-full"
               >
                 <div className="flex justify-between items-center">
                   <span className="text-xs text-white/90 uppercase font-mono font-semibold">Ice Friction</span>
                   <span className="text-xs">❄️</span>
                 </div>
                 <div>
-                  <div className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-2 font-mono group-hover:text-white">
+                  <div className="text-2xl sm:text-3xl xl:text-4xl font-bold tracking-tight text-white mb-2 font-mono group-hover:text-white whitespace-nowrap">
                     0.02 μ
+                  </div>
+                  <div className="w-full bg-neutral-800 h-1.5 rounded-full overflow-hidden mb-2">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={{ width: '15%' }}
+                      transition={{ duration: 0.8, ease: 'easeOut' }}
+                      className="h-full bg-white rounded-full"
+                    />
                   </div>
                   <div className="text-[11px] text-white/90 font-mono">CRYO-BEARING GLIDE</div>
                 </div>
